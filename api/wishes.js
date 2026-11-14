@@ -10,13 +10,13 @@ const MESSAGE_MIN_LENGTH = 3;
 const MESSAGE_MAX_LENGTH = 600;
 const COOLDOWN_MS = 20_000;
 
-function sanitizePlainText(raw = '') {
-  return String(raw)
-    .replace(/<[^>]*>/g, '')
-    .replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F]/g, '')
-    .replace(/[ \t]+/g, ' ')
-    .replace(/\n{3,}/g, '\n\n')
-    .trim();
+function getSupabaseHeaders() {
+  const secretKey = process.env.SUPABASE_SECRET_KEY;
+
+  return {
+    apikey: secretKey,
+    'Content-Type': 'application/json',
+  };
 }
 
 function containsSpam(text) {
