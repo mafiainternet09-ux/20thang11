@@ -52,9 +52,8 @@ function getSupabaseHeaders() {
 export default async function handler(req, res) {
   res.setHeader('Cache-Control', 'no-store');
   const supabaseUrl = process.env.SUPABASE_URL?.replace(/\/$/, '');
-  const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
-
-  if (!supabaseUrl || !serviceKey) {
+  const secretKey = process.env.SUPABASE_SECRET_KEY;
+if (!supabaseUrl || !secretKey) {
     return res.status(503).json({
       error: 'Chưa cấu hình SUPABASE_URL hoặc SUPABASE_SERVICE_ROLE_KEY trên máy chủ.',
       fallbackRecommended: true,
